@@ -4,7 +4,8 @@
   "description": "Bot do Discord que acessa a API do Vagalume para disponibilizar letras de músicas",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "type": "module",
   "repository": "git@github.com:ArthurSouzaC/lyrics-bot.git",
