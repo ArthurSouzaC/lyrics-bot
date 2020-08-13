@@ -4,14 +4,25 @@ export default {
     name: '&letra',
     description: 'Procura a letra de uma música na API do Vagalume',
     execute: async function(msg) {
-		console.log(msg.content)
 		msg.content = msg.content.replace('&letra', '')
 		const artist = msg.content.split('/')[0]
 		const music = msg.content.split('/')[1]
 
 		const url = `https://api.vagalume.com.br/search.php?apikey=${process.env.VAGALUME_API_TOKEN}&art=${encodeURI(artist)}&mus=${encodeURI(music)}`
-		const lyrics = await getLyrics(url)
-        msg.channel.send(lyrics.mus[0].text)
+		
+		try {
+			var lyrics = await getLyrics(url)
+			
+			if(lyrics.length > 2000) {
+				for(let i = 0; i < Math.floor(lyrics.length)/2000; i++){
+					msg.channel.send(lyrics.substring(i * 2000, (i * 2000) + 2000))
+				}
+			} else {
+				msg.channel.send(lyrics)
+			}
+		} catch (error) {
+			msg.channel.send('Ocorreu um erro ao executar o comando! Verifique a sintaxe.')
+		}
     }
 }
 
@@ -26,7 +37,12 @@ function getLyrics(url) {
 		})
 
 		reponse.on('end', () => {
-			resolve(JSON.parse(data))
+			try {
+				resolve(JSON.parse(data).mus[0].text)
+			} catch (err) {
+				reject(err)
+			}
+			
 		})
 
 		}).on('error', error => {
