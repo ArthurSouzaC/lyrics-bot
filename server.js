@@ -40,3 +40,7 @@ bot.on('message', msg => {
         msg.reply('Ocorreu um erro ao executar o comando!')
     }
 })
+
+app.listen(process.env.PORT, () => {
+    console.log('> app running on port ' + process.env.PORT)
+})
