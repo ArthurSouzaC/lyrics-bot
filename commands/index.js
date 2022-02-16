@@ -1,4 +1,4 @@
-import lyrics from './lyrics.js'
+import lyrics from './lyrics.js';
 
 export default {
     lyrics

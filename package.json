@@ -5,13 +5,14 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node index.js"
   },
   "type": "module",
   "repository": "git@github.com:ArthurSouzaC/lyrics-bot.git",
   "author": "ArthurSouzaC <arthursouza.info@gmail.com>",
   "license": "UNLICENSED",
   "dependencies": {
+    "axios": "^0.26.0",
     "discord.js": "^12.2.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1"
